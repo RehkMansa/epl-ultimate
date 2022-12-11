@@ -2,7 +2,7 @@ import { AllPositionsType, TeamPositions } from '../types';
 
 type ReducedObj = Record<AllPositionsType, TeamPositions>;
 
-const reducedPositions: ReducedObj = {
+export const reducedPositions: ReducedObj = {
 	centerBack: 'defense',
 	fullBack: 'defense',
 	wingBack: 'defense',

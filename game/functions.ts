@@ -6,14 +6,14 @@ import {
 	FormationType,
 	TeamPositions,
 } from '../types';
-import { randomNumber } from '../utils/randomNumber';
+import { randomInt } from '../utils/randomInt';
 
 const generateTeamFormations = () => {
 	const teamFormations = new Set<FormationType>(); // set removes duplicate entries
 
 	while (teamFormations.size < 3) {
-		const randomInt = randomNumber(0, formations.length - 1);
-		teamFormations.add(formations[randomInt]);
+		const num = randomInt(0, formations.length - 1);
+		teamFormations.add(formations[num]);
 	}
 
 	return [...teamFormations];

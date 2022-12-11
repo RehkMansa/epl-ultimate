@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const formations_1 = require("../global/formations");
-const randomNumber_1 = require("../utils/randomNumber");
+const reducedPositions_1 = require("../global/reducedPositions");
+const randomInt_1 = require("../utils/randomInt");
 const generateTeamFormations = () => {
     const teamFormations = new Set(); // set removes duplicate entries
     while (teamFormations.size < 3) {
-        const randomInt = (0, randomNumber_1.randomNumber)(0, formations_1.formations.length - 1);
-        teamFormations.add(formations_1.formations[randomInt]);
+        const num = (0, randomInt_1.randomInt)(0, formations_1.formations.length - 1);
+        teamFormations.add(formations_1.formations[num]);
     }
     return [...teamFormations];
 };
@@ -16,9 +17,9 @@ const generateTeamPlayers = (formationArr) => {
         const newObj = { ...acc };
         const keys = Object.keys(curr);
         keys.forEach((key) => {
-            if (typeof Number(curr[key]) === 'number') {
+            if (typeof curr[key] === 'number') {
                 if (curr[key] !== 0) {
-                    const current = Number(curr[key]) || 0;
+                    const current = Number(curr[key]) || 0; // provides a fallback as zero, this is for typescript not me
                     if (newObj[key] !== undefined) {
                         const average = Math.max(current, newObj[key]);
                         newObj[key] = average;
@@ -34,4 +35,27 @@ const generateTeamPlayers = (formationArr) => {
     return positions;
 };
 const team = generateTeamFormations();
-console.log(generateTeamPlayers(team));
+const positions = generateTeamPlayers(team);
+const getTeamPositions = (positions) => {
+    console.log(positions);
+    const counter = {
+        attacking: 0,
+        defense: 0,
+        midfield: 0,
+    };
+    let total = 0;
+    for (const key in positions) {
+        const role = key;
+        const position = (0, reducedPositions_1.getPlayerPosition)(role);
+        total += positions[role];
+        counter[position] += positions[role];
+    }
+    return { ...counter, total }; // reduces the positions to a single object;
+};
+const summedPositions = getTeamPositions(positions);
+console.log(summedPositions);
+/*
+    WE HAVE DIFFERENT POSITIONS
+        
+
+*/

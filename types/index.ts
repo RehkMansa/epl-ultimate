@@ -6,7 +6,7 @@ export type TeamType = {
 	wealth: number;
 };
 
-/* export type Positions =
+export type Positions =
 	| 'rightMidfielder'
 	| 'defensiveMidfielder'
 	| 'attackingMidfielder'
@@ -15,7 +15,7 @@ export type TeamType = {
 	| 'centerBack'
 	| 'centralMidfielder'
 	| 'centerForward'
-	| 'leftMidfielder'; */
+	| 'leftMidfielder';
 
 export type FormationType = {
 	name: string;
@@ -46,4 +46,19 @@ export type Player = {
 	age: number;
 	position: AllPositionsType;
 	defensiveAttributes: [];
+};
+
+export type PlayerAttributes = {
+	pace: number;
+	shooting: number;
+	passing: number;
+	dribbling: number;
+	tackling: number;
+	marking: number;
+	heading: number;
+	aggression: number;
+	positioning: number;
+	vision: number;
+	creativity: number;
+	workRate: number;
 };
