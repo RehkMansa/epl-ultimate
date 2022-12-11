@@ -1,0 +1,33 @@
+const splitValue = (value: number, items: number) => {
+	const result = [];
+	for (let i = 0; i < items; i++) {
+		const splitValue = value / items / 10;
+		result.push(Math.round(splitValue) * 10);
+	}
+	return result;
+
+    while (remainingPoints >= initialRating / 2) {
+		for (const attr in playerAttributes[position]) {
+			const avr = rating / 2;
+			const thr = rating / 4;
+			const attribute = <keyof PlayerAttributes>attr;
+			const weight = playerAttributes[position][attribute];
+
+			const rand = Math.random() * (avr - thr) + thr;
+			const value = parseFloat((weight * rand).toFixed(2));
+			if (weight >= 0.2) {
+				ratings[attribute] += value;
+			}
+
+			rating -= value;
+			remainingPoints = rating;
+
+			console.log(rating, value, attribute);
+		}
+	}
+
+};
+const value = 100;
+const items = 12;
+const splitValues = splitValue(value, items);
+

@@ -1,59 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const randomInt_1 = require("../utils/randomInt");
-const defenseOptions = {
-    tackling: (0, randomInt_1.randomInt)(2, (0, randomInt_1.randomInt)(2, 5)),
-    aggression: (0, randomInt_1.randomInt)(2, (0, randomInt_1.randomInt)(2, 5)),
-    positioning: (0, randomInt_1.randomInt)(2, (0, randomInt_1.randomInt)(2, 5)),
-    marking: (0, randomInt_1.randomInt)(2, (0, randomInt_1.randomInt)(2, 5)),
-    heading: (0, randomInt_1.randomInt)(2, (0, randomInt_1.randomInt)(2, 5)),
-    pace: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 4)),
-    passing: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 3)),
-    workRate: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 4)),
-    vision: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 3)),
-    shooting: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 3)),
-    dribbling: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 3)),
-    creativity: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 3)),
-};
-const midfielderOptions = {
-    tackling: (0, randomInt_1.randomInt)(2, (0, randomInt_1.randomInt)(2, 3)),
-    aggression: (0, randomInt_1.randomInt)(2, (0, randomInt_1.randomInt)(2, 5)),
-    positioning: (0, randomInt_1.randomInt)(2, (0, randomInt_1.randomInt)(2, 5)),
-    marking: (0, randomInt_1.randomInt)(2, (0, randomInt_1.randomInt)(2, 5)),
-    heading: (0, randomInt_1.randomInt)(2, (0, randomInt_1.randomInt)(2, 5)),
-    pace: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 4)),
-    passing: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 3)),
-    workRate: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 4)),
-    vision: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 3)),
-    shooting: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 3)),
-    dribbling: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 3)),
-    creativity: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 3)),
-};
-const attackerOptions = {
-    tackling: (0, randomInt_1.randomInt)(2, (0, randomInt_1.randomInt)(2, 5)),
-    aggression: (0, randomInt_1.randomInt)(2, (0, randomInt_1.randomInt)(2, 5)),
-    positioning: (0, randomInt_1.randomInt)(2, (0, randomInt_1.randomInt)(2, 5)),
-    marking: (0, randomInt_1.randomInt)(2, (0, randomInt_1.randomInt)(2, 5)),
-    heading: (0, randomInt_1.randomInt)(2, (0, randomInt_1.randomInt)(2, 5)),
-    pace: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 4)),
-    passing: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 3)),
-    workRate: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 4)),
-    vision: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 3)),
-    shooting: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 3)),
-    dribbling: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 3)),
-    creativity: (0, randomInt_1.randomInt)(1, (0, randomInt_1.randomInt)(1, 3)),
-};
-/*
-R = (pace * wPace) + (shooting * wShooting) + (passing * wPassing) + (dribbling * wDribbling) + (tackling * wTackling) + (marking * wMarking) + (heading * wHeading) + (aggression * wAggression) + (positioning * wPositioning) + (vision * wVision) + (creativity * wCreativity) + (workRate * wWorkRate)
-
-In this formula, R is the player's rating, pace, shooting, passing, dribbling, tackling, marking, heading,
-aggression, positioning, vision, creativity, and workRate are the player's attribute values, and wPace, wShooting,
-wPassing, wDribbling, wTackling, wMarking, wHeading, wAggression, wPositioning, wVision, wCreativity,
-and wWorkRate are the corresponding attribute weights.
-
-*/
+exports.calculateRatings = void 0;
 const playerAttributes = {
-    midfielders: {
+    midfield: {
         pace: 0.1,
         shooting: 0.1,
         passing: 0.2,
@@ -67,7 +16,7 @@ const playerAttributes = {
         creativity: 0.1,
         workRate: 0.1,
     },
-    attackers: {
+    attacking: {
         pace: 0.2,
         shooting: 0.2,
         passing: 0.1,
@@ -81,22 +30,22 @@ const playerAttributes = {
         creativity: 0.1,
         workRate: 0.1,
     },
-    defenders: {
-        pace: 0.1,
-        shooting: 0.1,
+    defense: {
+        pace: 0.13,
+        shooting: 0.05,
         passing: 0.1,
-        dribbling: 0.1,
-        tackling: 0.2,
-        marking: 0.2,
-        heading: 0.2,
+        dribbling: 0.07,
+        tackling: 0.22,
+        marking: 0.25,
+        heading: 0.15,
         aggression: 0.1,
-        positioning: 0.1,
-        vision: 0.1,
-        creativity: 0.1,
+        positioning: 0.15,
+        vision: 0.08,
+        creativity: 0.07,
         workRate: 0.1,
     },
 };
-const calculateRatings = (rating, position) => {
+const calculateRatings = (initial, position) => {
     const ratings = {
         aggression: 0,
         creativity: 0,
@@ -111,11 +60,19 @@ const calculateRatings = (rating, position) => {
         vision: 0,
         workRate: 0,
     };
+    let rating = initial;
     for (const attr in playerAttributes[position]) {
+        const avr = rating / 2;
+        const thr = rating / 4;
         const attribute = attr;
-        ratings[attribute] = playerAttributes[position][attribute] * rating;
+        const rand = Math.random() * (avr - thr) + thr;
+        const weight = playerAttributes[position][attribute];
+        const value = parseFloat((weight * rand).toFixed(2));
+        ratings[attribute] = value;
+        rating -= value;
     }
     return ratings;
 };
-const player1 = calculateRatings(120, 'attackers');
+exports.calculateRatings = calculateRatings;
+const player1 = (0, exports.calculateRatings)(1, 'defense');
 console.log(player1);

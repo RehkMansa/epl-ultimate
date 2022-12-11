@@ -4,8 +4,10 @@ import {
 	AllPositionsType,
 	FormationKeys,
 	FormationType,
+	PlayerAttributes,
 	TeamPositions,
 } from '../types';
+import { calculateRatings } from '../types/omor';
 import { randomInt } from '../utils/randomInt';
 
 const generateTeamFormations = () => {
@@ -53,12 +55,14 @@ const team = generateTeamFormations();
 const positions: Record<AllPositionsType, number> = generateTeamPlayers(team);
 
 const getTeamPositions = (positions: Record<AllPositionsType, number>) => {
-	console.log(positions);
+	console.time('create player');
 	const counter: Record<TeamPositions, number> = {
 		attacking: 0,
 		defense: 0,
 		midfield: 0,
 	};
+
+	const players = <PlayerAttributes[]>[];
 
 	let total = 0;
 
@@ -71,15 +75,23 @@ const getTeamPositions = (positions: Record<AllPositionsType, number>) => {
 		counter[position] += positions[role];
 	}
 
-	return { ...counter, total }; // reduces the positions to a single object;
+	for (const key in counter) {
+		const role = <TeamPositions>key;
+
+		for (let i = 0; i < counter[role]; i++) {
+			const player = calculateRatings(randomInt(150, 200), role);
+
+			players.push(player);
+		}
+	}
+
+	console.log(players.length, total);
+
+	console.timeEnd('create player');
+
+	return { ...counter, total, players }; // reduces the positions to a single object;
 };
 
 const summedPositions = getTeamPositions(positions);
 
-console.log(summedPositions);
-
-/* 
-	WE HAVE DIFFERENT POSITIONS
-		
-
-*/
+// console.log(summedPositions);

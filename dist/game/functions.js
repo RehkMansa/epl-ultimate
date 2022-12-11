@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const formations_1 = require("../global/formations");
 const reducedPositions_1 = require("../global/reducedPositions");
+const omor_1 = require("../types/omor");
 const randomInt_1 = require("../utils/randomInt");
 const generateTeamFormations = () => {
     const teamFormations = new Set(); // set removes duplicate entries
@@ -37,25 +38,24 @@ const generateTeamPlayers = (formationArr) => {
 const team = generateTeamFormations();
 const positions = generateTeamPlayers(team);
 const getTeamPositions = (positions) => {
-    console.log(positions);
+    console.time('create player');
     const counter = {
         attacking: 0,
         defense: 0,
         midfield: 0,
     };
+    const players = [];
     let total = 0;
     for (const key in positions) {
         const role = key;
         const position = (0, reducedPositions_1.getPlayerPosition)(role);
+        const player = (0, omor_1.calculateRatings)((0, randomInt_1.randomInt)(150, 200), position);
+        players.push(player);
         total += positions[role];
         counter[position] += positions[role];
     }
+    console.timeEnd('create player');
     return { ...counter, total }; // reduces the positions to a single object;
 };
 const summedPositions = getTeamPositions(positions);
 console.log(summedPositions);
-/*
-    WE HAVE DIFFERENT POSITIONS
-        
-
-*/
