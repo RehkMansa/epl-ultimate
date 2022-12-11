@@ -32,4 +32,8 @@ export type FormationType = {
 	centerForward: number;
 };
 
+export type FormationKeys = keyof FormationType;
+
+export type AllPositionsType = Exclude<FormationKeys, 'name' | 'formation'>;
+
 export type LeagueType = TeamType[];

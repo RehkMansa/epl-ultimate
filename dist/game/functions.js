@@ -1,19 +1,7 @@
 "use strict";
-// const chooseTeamFormation
 Object.defineProperty(exports, "__esModule", { value: true });
 const formations_1 = require("../global/formations");
 const randomNumber_1 = require("../utils/randomNumber");
-/*
-    we are going loop through all the teams
-
-    create a new array and formations which is an [array]
-
-    generate players
-
-        based on each for
-
-*/
-// const allTeams = ;
 const generateTeamFormations = () => {
     const teamFormations = new Set(); // set removes duplicate entries
     while (teamFormations.size < 3) {
@@ -22,10 +10,28 @@ const generateTeamFormations = () => {
     }
     return [...teamFormations];
 };
+// const isGreater = (num1: number, num2: number) => (num1 >= num2 ? num1 : num2);
 const generateTeamPlayers = (formationArr) => {
     const positions = formationArr.reduce((acc, curr) => {
         const newObj = { ...acc };
+        const keys = Object.keys(curr);
+        keys.forEach((key) => {
+            if (typeof Number(curr[key]) === 'number') {
+                if (curr[key] !== 0) {
+                    const current = Number(curr[key]) || 0;
+                    if (newObj[key] !== undefined) {
+                        const average = Math.max(current, newObj[key]);
+                        newObj[key] = average;
+                    }
+                    else {
+                        newObj[key] = current;
+                    }
+                }
+            }
+        });
+        return newObj;
     }, {});
     return positions;
 };
-console.log(generateTeamPlayers(generateTeamFormations()));
+const team = generateTeamFormations();
+console.log(generateTeamPlayers(team));
