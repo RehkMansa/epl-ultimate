@@ -1,4 +1,6 @@
-const formations = [
+import { FormationType } from '../types';
+
+export const formations: FormationType[] = [
 	{
 		name: '4-3-3 Wide',
 		formation: '4-3-3',
