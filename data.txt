@@ -1,0 +1,20 @@
+Manchester City: Attacking: 100, Defense: 90, Midfield: 95, Wealth: 5
+Manchester United: Attacking: 95, Defense: 90, Midfield: 95, Wealth: 5
+Liverpool: Attacking: 95, Defense: 90, Midfield: 90, Wealth: 4
+Chelsea: Attacking: 90, Defense: 85, Midfield: 90, Wealth: 5
+Leicester City: Attacking: 90, Defense: 85, Midfield: 85, Wealth: 4
+Tottenham Hotspur: Attacking: 85, Defense: 85, Midfield: 85, Wealth: 4
+Arsenal: Attacking: 85, Defense: 80, Midfield: 85, Wealth: 5
+Wolverhampton Wanderers: Attacking: 80, Defense: 80, Midfield: 80, Wealth: 3
+Everton: Attacking: 80, Defense: 75, Midfield: 80, Wealth: 4
+Southampton: Attacking: 75, Defense: 75, Midfield: 75, Wealth: 3
+West Ham United: Attacking: 75, Defense: 70, Midfield: 75, Wealth: 3
+Aston Villa: Attacking: 70, Defense: 70, Midfield: 70, Wealth: 3
+Newcastle United: Attacking: 70, Defense: 65, Midfield: 70, Wealth: 3
+Crystal Palace: Attacking: 65, Defense: 65, Midfield: 65, Wealth: 3
+Burnley: Attacking: 60, Defense: 65, Midfield: 60, Wealth: 3
+Brighton & Hove Albion: Attacking: 60, Defense: 60, Midfield: 60, Wealth: 3
+Sheffield United: Attacking: 55, Defense: 60, Midfield: 55, Wealth: 2
+Fulham: Attacking: 50, Defense: 55, Midfield: 50, Wealth: 2
+Leeds United: Attacking: 45, Defense: 55, Midfield: 45, Wealth: 2
+West Bromwich Albion: Attacking: 45, Defense: 50, Midfield: 45, Wealth: 2
