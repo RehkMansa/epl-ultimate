@@ -6,7 +6,7 @@ export type TeamType = {
 	wealth: number;
 };
 
-export type Positions =
+/* export type Positions =
 	| 'rightMidfielder'
 	| 'defensiveMidfielder'
 	| 'attackingMidfielder'
@@ -15,7 +15,7 @@ export type Positions =
 	| 'centerBack'
 	| 'centralMidfielder'
 	| 'centerForward'
-	| 'leftMidfielder';
+	| 'leftMidfielder'; */
 
 export type FormationType = {
 	name: string;
@@ -39,3 +39,11 @@ export type AllPositionsType = Exclude<FormationKeys, 'name' | 'formation'>;
 export type TeamPositions = Exclude<keyof TeamType, 'team' | 'wealth'>;
 
 export type LeagueType = TeamType[];
+
+export type Player = {
+	firstName: string;
+	lastName: string;
+	age: number;
+	position: AllPositionsType;
+	defensiveAttributes: [];
+};
