@@ -25,4 +25,5 @@ const reducedPositionsStore = {
 	attack: ['winger', 'striker', 'secondStriker', 'centerForward'],
 } as const;
 
-const getPositions = (position: AllPositionsType) => reducedPositions[position];
+export const getPlayerPosition = (position: AllPositionsType) =>
+	reducedPositions[position];

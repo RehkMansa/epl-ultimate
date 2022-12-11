@@ -1,9 +1,10 @@
 import { formations } from '../global/formations';
+import { getPlayerPosition } from '../global/reducedPositions';
 import {
 	AllPositionsType,
 	FormationKeys,
 	FormationType,
-	TeamType,
+	TeamPositions,
 } from '../types';
 import { randomNumber } from '../utils/randomNumber';
 
@@ -51,4 +52,34 @@ const team = generateTeamFormations();
 
 const positions: Record<AllPositionsType, number> = generateTeamPlayers(team);
 
-// const totalPlayers =
+const getTeamPositions = (positions: Record<AllPositionsType, number>) => {
+	console.log(positions);
+	const counter: Record<TeamPositions, number> = {
+		attacking: 0,
+		defense: 0,
+		midfield: 0,
+	};
+
+	let total = 0;
+
+	for (const key in positions) {
+		const role = <AllPositionsType>key;
+		const position = getPlayerPosition(role);
+
+		total += positions[role];
+
+		counter[position] += positions[role];
+	}
+
+	return { ...counter, total }; // reduces the positions to a single object;
+};
+
+const summedPositions = getTeamPositions(positions);
+
+console.log(summedPositions);
+
+/* 
+	WE HAVE DIFFERENT POSITIONS
+		
+
+*/
