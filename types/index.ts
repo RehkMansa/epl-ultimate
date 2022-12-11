@@ -36,4 +36,6 @@ export type FormationKeys = keyof FormationType;
 
 export type AllPositionsType = Exclude<FormationKeys, 'name' | 'formation'>;
 
+export type TeamPositions = Exclude<keyof TeamType, 'team' | 'wealth'>;
+
 export type LeagueType = TeamType[];
