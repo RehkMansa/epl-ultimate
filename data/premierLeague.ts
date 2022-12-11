@@ -1,4 +1,4 @@
-import { LeagueType } from './types';
+import { LeagueType } from '../types';
 
 export const premierLeagueTeams: LeagueType = [
 	{
